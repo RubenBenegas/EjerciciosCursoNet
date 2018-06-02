@@ -1,0 +1,81 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Calculadora";
+    
+}
+
+<marquee> Practica clase 7 - Calculadora - Curso.Net - Ruben Benegas</marquee>
+
+    <form method="post">
+
+
+                <input id="n1" class="numero"  type="number" name="numero1" value="@Model.valor1" /> <br />
+
+
+
+
+                <select id="Operacion" name="operacion" >
+                    @if (Model.Oper == "suma")
+                    {
+                        <option selected value="suma">Suma</option>
+                        <option value="resta">Resta</option>
+                        <option value="multiplicacion">Multiplicacion</option>
+                        <option value="division">Division</option>
+                    }
+                    else if (Model.Oper == "resta")
+                    {
+                        <option value="suma">Suma</option>
+                        <option selected value="resta">Resta</option>
+                        <option value="multiplicacion">Multiplicacion</option>
+                        <option value="division">Division</option>
+                    }
+                    else if (Model.Oper == "multiplicacion")
+                    {
+                        <option value="suma">Suma</option>
+                        <option value="resta">Resta</option>
+                        <option selected value="multiplicacion">Multiplicacion</option>
+                        <option value="division">Division</option>
+                    }
+                    else if (Model.Oper == "division")
+                    {
+                        <option value="suma">Suma</option>
+                        <option value="resta">Resta</option>
+                        <option value="multiplicacion">Multiplicacion</option>
+                        <option selected value="division">Division</option>
+                    }
+                    else
+                    {
+                        <option value="suma">Suma</option>
+                        <option value="resta">Resta</option>
+                        <option value="multiplicacion">Multiplicacion</option>
+                        <option value="division">Division</option>
+                    }
+
+
+
+                </select> <br />
+
+
+                    <input id="n2" class="numero"  type="number" name="numero2" value="@Model.valor2" /> <br />
+
+                                              <button type="submit">Calcular</button>                     
+        
+
+        @if (Model.MostrarResultado)
+        {
+            
+        <hr/>
+        
+        <h3> <span>Resultado: </span>@Model.resultado </h3>
+                
+
+
+        }
+
+    </form>
+
+
+
+
+
