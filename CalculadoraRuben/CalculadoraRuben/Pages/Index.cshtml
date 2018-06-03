@@ -10,17 +10,15 @@
 <div class="row">
     <div class="col-md-6">
         <h2 class="text-success">Calculadora</h2>
-
         <div class="row">
             <div class="col-md-12">
                 <form class="form-horizontal" method="get">
 
                     <div class="form-group">
                         <div class="col-md-9 col-xs-9">
-                            <input placeholder="Ingrese el numero 1..." class="form-control" type="number" name="numero1" value="@Model.valor1" />
+                            <input placeholder="Ingrese el numero 1..." class="form-control" type="number" name="numero1" value="@Model.Valor1" />
                         </div>
                     </div>
-
                     <div class="form-group">
                         <div class="col-md-9 col-xs-9">
                             <select class="form-control" name="operacion">
@@ -59,22 +57,22 @@
                                     <option value="multiplicacion">Multiplicacion</option>
                                     <option value="division">Division</option>
                                 }
-
                             </select>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-md-9 col-xs-9">
-                            <input placeholder="Ingrese el numero 2..." class="form-control" type="number" name="numero2" value="@Model.valor2" />
-
+                            <input placeholder="Ingrese el numero 2..." class="form-control" type="number" name="numero2" value="@Model.Valor2" />
                         </div>
                     </div>
 
-                    @if (Model.resultado != null)
+                    <button class="btn btn-lg btn-success" type="submit">Calcular</button>
+
+                    @if (Model.Resultado != null)
                     {
                         <h3 class="text-danger">
-                            <span class="text-warning">Resultado: </span>@Model.resultado
+                            <span class="text-warning">Resultado: </span>@Model.Resultado
                         </h3>
                     }
                     else
@@ -82,53 +80,47 @@
                         <h3 class="text-danger">@ViewData["Error"]</h3>
                     }
 
-                    <button class="btn btn-lg btn-success" type="submit">Calcular</button>
                 </form>
             </div>
-
-
-
-            
         </div>
     </div>
 
     <div class="col-md-6">
-        <h2 class="text-success">Historial de calculos</h2>
-        
+        <h2 class="text-success">Historial de calculos</h2>  
         <div  class="row">
             <div class="col-md-12">
                 <table class="table table-responsive table-hover">
                     <thead>
                     </thead>
                     <tbody>
-
-                    @if (Model.Calculos.Count != 0)
-                    {
-                        if (Model.Calculos.Count > 5)
+                        @if (Model.Calculos.Count != 0)
                         {
-                            for (int i = 0; i < 5; i++)
+                            if (Model.Calculos.Count > 5)
                             {
-                                <tr>
-                                    <td>@Model.Calculos[i]</td>
-                                </tr>
-
+                                for (int i = 0; i < 5; i++)
+                                {
+                                    <tr>
+                                        <td>@Model.Calculos[i]</td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                foreach (var item in Model.Calculos)
+                                {
+                                    <tr>
+                                        <td>@item</td>
+                                    </tr>
+                                }
                             }
                         }
-                        else
-                        {
-                            foreach (var item in Model.Calculos)
-                            {
-                                <tr>
-                                    <td>@item</td>
-                                </tr>
-                            }
-                        }
-
-                    }
-
-
                     </tbody>
                 </table>
+                
+                @if (Model.Calculos.Count != 0)
+                {
+                    <a class="btn btn-md btn-danger" href="Index?limpiar=true">Borrar historial</a>
+                }
             </div>
         </div>
     </div>
