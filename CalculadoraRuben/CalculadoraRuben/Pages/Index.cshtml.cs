@@ -27,14 +27,16 @@ namespace CalculadoraRuben.Pages
         public string valor1 { get; set; }
         public string valor2 { get; set; }
         public string Oper { get; set; }
+        public string QueryStringPost;
 
         public void OnGet(decimal numero1, decimal numero2, string operacion)
         {
 
+           
             
-            var a = Calculos;
             if (numero1 != 0 || numero2 != 0)
             {
+
                 switch (operacion)
                 {
                     case "suma":
@@ -55,7 +57,7 @@ namespace CalculadoraRuben.Pages
             }
             ObtenerHistorialCalculos();
 
-            var x = Calculos;
+
 
         }
 
@@ -65,7 +67,8 @@ namespace CalculadoraRuben.Pages
             var n2 = Convert.ToInt32(Request.Form["numero2"]);
             var operacion = Request.Form["operacion"];
 
-            return Redirect("Index?numero1=" + n1 + "&numero2=" + n2 + "&operacion=" + operacion);
+            QueryStringPost = "Index?numero1=" + n1 + "&numero2=" + n2 + "&operacion=" + operacion;
+            return Redirect(QueryStringPost);
 
         }
 
