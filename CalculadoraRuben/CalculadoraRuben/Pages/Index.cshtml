@@ -2,79 +2,137 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Calculadora";
-    
+
 }
 
 <marquee> Practica clase 7 - Calculadora - Curso.Net - Ruben Benegas</marquee>
 
-    <form method="post">
+<div class="row">
+    <div class="col-md-6">
+        <h2 class="text-success">Calculadora</h2>
 
+        <div class="row">
+            <div class="col-md-12">
+                <form class="form-horizontal" method="post">
 
-                <input id="n1" class="numero"  type="number" name="numero1" value="@Model.valor1" /> <br />
+                    <div class="form-group">
+                        <div class="col-md-9 col-xs-9">
+                            <input placeholder="Ingrese el numero 1..." class="form-control" type="number" name="numero1" value="@Model.valor1" />
+                        </div>
+                    </div>
 
+                    <div class="form-group">
+                        <div class="col-md-9 col-xs-9">
+                            <select class="form-control" name="operacion">
+                                @if (Model.Oper == "suma")
+                                {
+                                    <option selected value="suma">Suma</option>
+                                    <option value="resta">Resta</option>
+                                    <option value="multiplicacion">Multiplicacion</option>
+                                    <option value="division">Division</option>
+                                }
+                                else if (Model.Oper == "resta")
+                                {
+                                    <option value="suma">Suma</option>
+                                    <option selected value="resta">Resta</option>
+                                    <option value="multiplicacion">Multiplicacion</option>
+                                    <option value="division">Division</option>
+                                }
+                                else if (Model.Oper == "multiplicacion")
+                                {
+                                    <option value="suma">Suma</option>
+                                    <option value="resta">Resta</option>
+                                    <option selected value="multiplicacion">Multiplicacion</option>
+                                    <option value="division">Division</option>
+                                }
+                                else if (Model.Oper == "division")
+                                {
+                                    <option value="suma">Suma</option>
+                                    <option value="resta">Resta</option>
+                                    <option value="multiplicacion">Multiplicacion</option>
+                                    <option selected value="division">Division</option>
+                                }
+                                else
+                                {
+                                    <option value="suma">Suma</option>
+                                    <option value="resta">Resta</option>
+                                    <option value="multiplicacion">Multiplicacion</option>
+                                    <option value="division">Division</option>
+                                }
 
+                            </select>
+                        </div>
+                    </div>
 
+                    <div class="form-group">
+                        <div class="col-md-9 col-xs-9">
+                            <input placeholder="Ingrese el numero 2..." class="form-control" type="number" name="numero2" value="@Model.valor2" />
 
-                <select id="Operacion" name="operacion" >
-                    @if (Model.Oper == "suma")
+                        </div>
+                    </div>
+
+                    @if (Model.resultado != null)
                     {
-                        <option selected value="suma">Suma</option>
-                        <option value="resta">Resta</option>
-                        <option value="multiplicacion">Multiplicacion</option>
-                        <option value="division">Division</option>
-                    }
-                    else if (Model.Oper == "resta")
-                    {
-                        <option value="suma">Suma</option>
-                        <option selected value="resta">Resta</option>
-                        <option value="multiplicacion">Multiplicacion</option>
-                        <option value="division">Division</option>
-                    }
-                    else if (Model.Oper == "multiplicacion")
-                    {
-                        <option value="suma">Suma</option>
-                        <option value="resta">Resta</option>
-                        <option selected value="multiplicacion">Multiplicacion</option>
-                        <option value="division">Division</option>
-                    }
-                    else if (Model.Oper == "division")
-                    {
-                        <option value="suma">Suma</option>
-                        <option value="resta">Resta</option>
-                        <option value="multiplicacion">Multiplicacion</option>
-                        <option selected value="division">Division</option>
+                        <h3 class="text-danger">
+                            <span class="text-warning">Resultado: </span>@Model.resultado
+                        </h3>
                     }
                     else
                     {
-                        <option value="suma">Suma</option>
-                        <option value="resta">Resta</option>
-                        <option value="multiplicacion">Multiplicacion</option>
-                        <option value="division">Division</option>
+                        <h3 class="text-danger">@ViewData["Error"]</h3>
+                    }
+
+                    <button class="btn btn-lg btn-success" type="submit">Calcular</button>
+                </form>
+            </div>
+
+
+
+            
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <h2 class="text-success">Historial de calculos</h2>
+        
+        <div  class="row">
+            <div class="col-md-12">
+                <table class="table table-responsive table-hover">
+                    <thead>
+                    </thead>
+                    <tbody>
+
+                    @if (Model.Calculos.Count != 0)
+                    {
+                        if (Model.Calculos.Count > 5)
+                        {
+                            for (int i = 0; i < 5; i++)
+                            {
+                                <tr>
+                                    <td>@Model.Calculos[i]</td>
+                                </tr>
+
+                            }
+                        }
+                        else
+                        {
+                            foreach (var item in Model.Calculos)
+                            {
+                                <tr>
+                                    <td>@item</td>
+                                </tr>
+                            }
+                        }
+
                     }
 
 
-
-                </select> <br />
-
-
-                    <input id="n2" class="numero"  type="number" name="numero2" value="@Model.valor2" /> <br />
-
-                                              <button type="submit">Calcular</button>                     
-        
-
-        @if (Model.MostrarResultado)
-        {
-            
-        <hr/>
-        
-        <h3> <span>Resultado: </span>@Model.resultado </h3>
-                
-
-
-        }
-
-    </form>
-
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
