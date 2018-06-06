@@ -22,84 +22,82 @@ namespace CalculadoraRuben.Pages
         }
 
         //Definimos los campos y propiedades que utilizaremos
-        public string Linea;
-        public ArrayList Calculos = new ArrayList();
-        public decimal? Resultado;
-        public string QueryStringPost;
-
         public string Valor1 { get; set; }
         public string Valor2 { get; set; }
         public string Oper { get; set; }
+        public decimal? Resultado;
+        public ArrayList Calculos = new ArrayList();
 
         public void OnGet(decimal numero1, decimal numero2, string operacion, bool limpiar)
         {
+            //Armamos el path donde estaria el archivo que contendra nuestros datos
+            var path = ObtenerPath();
 
             //Si el parametro limpiar es verdadero limpiamos el historial de los calculos
             if (limpiar)
             {
                 //Llamamos el metodo d limpiar el historial
-                LimpiarHistorial();
+                LimpiarHistorial(path);
                 return;
             }
-            
-            //Preguntamos si alguno de los numeros es distinto de 0 para poder operar
-            if (numero1 != 0 || numero2 != 0)
-            {
-                //Aqui pasamos el parametro operacion para saber que operacion matematica vamos a realizar
-                switch (operacion)
-                {
-                    case "suma":
-                        //Llamamos el motodo para sumar pasandole los numeros en la sobrecarga
-                        Sumar(numero1, numero2);
-                        break;
-                    case "resta":
-                        //Llamamos el motodo para restar pasandole los numeros en la sobrecarga
-                        Restar(numero1, numero2);
-                        break;
-                    case "multiplicacion":
-                        //Llamamos el motodo para multiplicar pasandole los numeros en la sobrecarga
-                        Multiplicar(numero1, numero2);
-                        break;
-                    case "division":
-                        //Llamamos el motodo para dividir pasandole los numeros en la sobrecarga
-                        Dividir(numero1, numero2);
-                        break;
-                }
-                
-                //Aqui llamamos el metodo para guardar los calculos para que queden registrados en el historial
-                GuardarCalculos(numero1, numero2, operacion);
-            }
-            //Aqui llamamos el metodo para obtener los calculos que quedaron registrados en el historial
-            ObtenerHistorialCalculos();
-
-        }
-
-        public ActionResult OnPost()
-        {
-            //Armamos el path donde se estaria el archivo que contendra nuestros datos
-            var fileName = "Calculos.txt";
-            var reportsFolder = "\\Calculos\\";
-            var webRoot = _hostingEnvironment.WebRootPath;
-            var path = Path.Combine(webRoot + reportsFolder, fileName);
 
             //Preguntamos si esta path no contiene este archivo
             if (!System.IO.File.Exists(path))
             {
-                //Si no existe lo creamos
-                System.IO.File.Create(path);
+                //Si no existe lo creamos y lo liberamos
+                System.IO.File.Create(path).Dispose();
             }
 
+            //Preguntamos si alguno de los numeros es distinto de 0 para poder operar
+            if (numero1 != 0 || numero2 != 0)
+            {
+                //Llamamos el metodo para realizar los calculos
+                Calcular(numero1, numero2, operacion);
+            }
+            //Aqui llamamos el metodo para obtener los calculos que quedaron registrados en el historial
+            ObtenerHistorialCalculos(path);
+        }
+
+        public ActionResult OnPost()
+        {
             //Obtenemos los valores de los inputs por medio de sus names
             var n1 = Convert.ToInt32(Request.Form["numero1"]);
             var n2 = Convert.ToInt32(Request.Form["numero2"]);
             var operacion = Request.Form["operacion"];
 
-            //Armamos la query string donde pasaremos los valores anteriores a los parametros del OnGet()
-            QueryStringPost = "Index?numero1=" + n1 + "&numero2=" + n2 + "&operacion=" + operacion;
-            
-            //Redireccionamos a la url que armamos anteriormente
-            return Redirect(QueryStringPost);
+            //Aqui llamamos el metodo para guardar los calculos para que queden registrados en el historial
+            GuardarCalculos(n1, n2, operacion);
 
+            //Armamos la query string donde pasaremos los valores anteriores a los parametros del OnGet()
+            var queryString = "Index?numero1=" + n1 + "&numero2=" + n2 + "&operacion=" + operacion;
+
+            //Redireccionamos a la url que armamos anteriormente
+            return Redirect(queryString);
+
+        }
+
+        private void Calcular(decimal numero1, decimal numero2, string operacion)
+        {
+            //Aqui pasamos el parametro operacion para saber que operacion matematica vamos a realizar
+            switch (operacion)
+            {
+                case "suma":
+                    //Llamamos el motodo para sumar pasandole los numeros en la sobrecarga
+                    Sumar(numero1, numero2);
+                    break;
+                case "resta":
+                    //Llamamos el motodo para restar pasandole los numeros en la sobrecarga
+                    Restar(numero1, numero2);
+                    break;
+                case "multiplicacion":
+                    //Llamamos el motodo para multiplicar pasandole los numeros en la sobrecarga
+                    Multiplicar(numero1, numero2);
+                    break;
+                case "division":
+                    //Llamamos el motodo para dividir pasandole los numeros en la sobrecarga
+                    Dividir(numero1, numero2);
+                    break;
+            }
         }
 
         private void Sumar(decimal num1, decimal num2)
@@ -165,10 +163,7 @@ namespace CalculadoraRuben.Pages
         private void GuardarCalculos(decimal numero1, decimal numero2, string operacion)
         {
             //Aqui armamos el path donde se encuentra el archivo a editar
-            var fileName = "Calculos.txt";
-            var reportsFolder = "\\Calculos\\";
-            var webRoot = _hostingEnvironment.WebRootPath;
-            var path = Path.Combine(webRoot + reportsFolder, fileName);
+            var path = ObtenerPath();
 
             //Aqui instanciamos nuestro "escritor" para editar el archivo, pasandole el path
             using (System.IO.StreamWriter esc = new StreamWriter(path, true))
@@ -190,7 +185,7 @@ namespace CalculadoraRuben.Pages
                         break;
                     case "division":
                         //En el caso de que dividamos por 0 el resultado se setea como null. Por lo tanto editamos el txt solo si tenemos un resultado
-                        if (Resultado != null)
+                        if (numero2 != 0)
                         {
                             //Agregamos una linea al archivo pasandole como sobrecarga la cadena que armamos
                             esc.WriteLine(numero1 + " / " + numero2 + " = " + (numero1 / numero2));
@@ -200,14 +195,9 @@ namespace CalculadoraRuben.Pages
             }
         }
 
-        private void ObtenerHistorialCalculos()
+        private void ObtenerHistorialCalculos(string path)
         {
-            //Armamos el path en donde esta nuestro archivo
-            var fileName = "Calculos.txt";
-            var reportsFolder = "\\Calculos\\";
-            var webRoot = _hostingEnvironment.WebRootPath;
-            var path = Path.Combine(webRoot + reportsFolder, fileName);
-
+            var linea = "";
             //Lo obtenemos solo si existe, para saber esto pasamos nuestro path como sobrecarga al siguiente metodo
             if (System.IO.File.Exists(path))
             {
@@ -215,10 +205,10 @@ namespace CalculadoraRuben.Pages
                 using (StreamReader read = new StreamReader(path, false))
                 {
                     //Aqui leemos linea por linea del txt
-                    while ((Linea = read.ReadLine()) != null)
+                    while ((linea = read.ReadLine()) != null)
                     {
                         //Agregamos cada linea a nuestro ArrayList de Calculos, el cual usaremos para recorrer en el frontend para mostrar cada calculo
-                        Calculos.Add(Linea);
+                        Calculos.Add(linea);
                     }
                 }
 
@@ -227,7 +217,14 @@ namespace CalculadoraRuben.Pages
             }  
         }
 
-        private void LimpiarHistorial()
+        private void LimpiarHistorial(string path)
+        {
+            //Eliminamos el archivo pasandole el path
+            System.IO.File.Delete(path);
+
+        }
+
+        private string ObtenerPath()
         {
             //Aqui armamos el path donde se encuentra o encontraria el archivo donde registrariamos los calculos
             var fileName = "Calculos.txt";
@@ -235,9 +232,7 @@ namespace CalculadoraRuben.Pages
             var webRoot = _hostingEnvironment.WebRootPath;
             var path = Path.Combine(webRoot + reportsFolder, fileName);
 
-            //Eliminamos el archivo pasandole el path
-            System.IO.File.Delete(path);
-
+            return path;
         }
 
     }
