@@ -10,8 +10,6 @@ namespace CalculadoraRubenMVC.Repository
 {
     public class CalculadoraRepository
     {
-
-
         CalculadoraModel modelo; 
         //Constructor
         public CalculadoraRepository()
