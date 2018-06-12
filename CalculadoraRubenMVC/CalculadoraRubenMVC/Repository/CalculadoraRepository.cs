@@ -19,7 +19,7 @@ namespace CalculadoraRubenMVC.Repository
              modelo = new CalculadoraModel(); 
         }
 
-        public CalculadoraModel ProcesarOperacion(decimal numero1, decimal numero2, string operacion, bool limpiar, IHostingEnvironment hostingEnvironment)
+        public CalculadoraModel ProcesarOperacion(decimal numero1, decimal numero2, OperacionEnum operacion, bool limpiar, IHostingEnvironment hostingEnvironment)
         {
             //Armamos el path donde estaria el archivo que contendra nuestros datos
             var path = ObtenerPath(hostingEnvironment);
@@ -51,24 +51,25 @@ namespace CalculadoraRubenMVC.Repository
             return modelo;
         }
 
-        private void Calcular(decimal numero1, decimal numero2, string operacion)
+        private void Calcular(decimal numero1, decimal numero2, OperacionEnum operacion)
         {
+
             //Aqui pasamos el parametro operacion para saber que operacion matematica vamos a realizar
             switch (operacion)
             {
-                case "suma":
+                case OperacionEnum.Suma:
                     //Llamamos el motodo para sumar pasandole los numeros en la sobrecarga
                     Sumar(numero1, numero2);
                     break;
-                case "resta":
+                case OperacionEnum.Resta:
                     //Llamamos el motodo para restar pasandole los numeros en la sobrecarga
                     Restar(numero1, numero2);
                     break;
-                case "multiplicacion":
+                case OperacionEnum.Multiplicacion:
                     //Llamamos el motodo para multiplicar pasandole los numeros en la sobrecarga
                     Multiplicar(numero1, numero2);
                     break;
-                case "division":
+                case OperacionEnum.Division:
                     //Llamamos el motodo para dividir pasandole los numeros en la sobrecarga
                     Dividir(numero1, numero2);
                     break;
@@ -80,7 +81,7 @@ namespace CalculadoraRubenMVC.Repository
             //Realizamos la operacion aritmetica
             modelo.Resultado = num1 + num2;
             //Le damos un valor a nuestra propiedad Oper para que recordar el valor de esta cuando se recarga la pagina
-            modelo.Oper = "suma";
+            modelo.Oper = OperacionEnum.Suma;
             //Llamamos el metodo para recordar los valores de nuestros numeros cuando se recarga la pagina
             GuardarValores(num1, num2);
         }
@@ -90,7 +91,7 @@ namespace CalculadoraRubenMVC.Repository
             //Realizamos la operacion aritmetica
             modelo.Resultado = num1 - num2;
             //Le damos un valor a nuestra propiedad Oper para que recordar el valor de esta cuando se recarga la pagina
-            modelo.Oper = "resta";
+            modelo.Oper = OperacionEnum.Resta;
             //Llamamos el metodo para recordar los valores de nuestros numeros cuando se recarga la pagina
             GuardarValores(num1, num2);
         }
@@ -100,7 +101,7 @@ namespace CalculadoraRubenMVC.Repository
             //Realizamos la operacion aritmetica
             modelo.Resultado = num1 * num2;
             //Le damos un valor a nuestra propiedad Oper para que recordar el valor de esta cuando se recarga la pagina
-            modelo.Oper = "multiplicacion";
+            modelo.Oper = OperacionEnum.Multiplicacion;
             //Llamamos el metodo para recordar los valores de nuestros numeros cuando se recarga la pagina
             GuardarValores(num1, num2);
         }
@@ -109,10 +110,10 @@ namespace CalculadoraRubenMVC.Repository
         {
             //Si el segundo numero es distinto de 0 realizamos la operacion
             if (num2 != 0)
-            {
+            
                 //Realizamos la operacion aritmetica
                 modelo.Resultado = num1 / num2;
-            }
+            
             else
             {
                 //Creamos un ViewData para despues mostrar este mensaje en el front en caso de q se intente dividir por cero
@@ -122,7 +123,7 @@ namespace CalculadoraRubenMVC.Repository
             }
 
             //Le damos un valor a nuestra propiedad Oper para que recordar el valor de esta cuando se recarga la pagina
-            modelo.Oper = "division";
+            modelo.Oper = OperacionEnum.Division;
             //Llamamos el metodo para recordar los valores de nuestros numeros cuando se recarga la pagina
             GuardarValores(num1, num2);
         }

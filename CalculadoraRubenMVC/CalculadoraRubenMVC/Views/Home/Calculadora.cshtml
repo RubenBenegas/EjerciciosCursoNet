@@ -20,28 +20,28 @@
                     <div class="form-group">
                         <div class="col-md-9 col-xs-9">
                             <select class="form-control" name="operacion">
-                                @if (Model.Oper == "suma")
+                                @if (Model.Oper == OperacionEnum.Suma)
                                 {
                                     <option selected value="suma">Suma</option>
                                     <option value="resta">Resta</option>
                                     <option value="multiplicacion">Multiplicacion</option>
                                     <option value="division">Division</option>
                                 }
-                                else if (Model.Oper == "resta")
+                                else if (Model.Oper == OperacionEnum.Resta)
                                 {
                                     <option value="suma">Suma</option>
                                     <option selected value="resta">Resta</option>
                                     <option value="multiplicacion">Multiplicacion</option>
                                     <option value="division">Division</option>
                                 }
-                                else if (Model.Oper == "multiplicacion")
+                                else if (Model.Oper == OperacionEnum.Multiplicacion)
                                 {
                                     <option value="suma">Suma</option>
                                     <option value="resta">Resta</option>
                                     <option selected value="multiplicacion">Multiplicacion</option>
                                     <option value="division">Division</option>
                                 }
-                                else if (Model.Oper == "division")
+                                else if (Model.Oper == OperacionEnum.Division)
                                 {
                                     <option value="suma">Suma</option>
                                     <option value="resta">Resta</option>
@@ -117,6 +117,7 @@
 
                 @if (Model.Calculos.Count != 0)
                 {
+                    <a class="btn btn-md btn-info" href="~/Home/Descargar">Descargar historial</a>
                     <a class="btn btn-md btn-danger" href="~/Home/Calculadora?limpiar=true">Borrar historial</a>
                 }
             </div>

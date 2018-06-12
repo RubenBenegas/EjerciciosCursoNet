@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using CalculadoraRubenMVC.Models;
 using CalculadoraRubenMVC.Repository;
 using Microsoft.AspNetCore.Hosting;
+using System.IO;
 
 namespace CalculadoraRubenMVC.Controllers
 {
@@ -20,7 +21,7 @@ namespace CalculadoraRubenMVC.Controllers
         }
 
         [HttpGet]
-        public IActionResult Calculadora(decimal numero1, decimal numero2, string operacion, bool limpiar)
+        public IActionResult Calculadora(decimal numero1, decimal numero2, OperacionEnum operacion, bool limpiar)
         {
             var repository = new CalculadoraRepository();
 
@@ -49,6 +50,18 @@ namespace CalculadoraRubenMVC.Controllers
         }
 
 
-        
+        [HttpGet]
+        public FileResult Descargar()
+        {
+            var fileName = "Calculos.txt";
+            var reportsFolder = "\\Calculos\\";
+            var webRoot = _hostingEnvironment.WebRootPath;
+            var path = Path.Combine(webRoot + reportsFolder, fileName);
+
+            var fileNameDownload = "HistorialCalculos-" + String.Format(DateTime.Today.ToShortDateString(), "dd-MM-yyyy") + ".txt";
+            byte[] file = System.IO.File.ReadAllBytes(path);
+            return File(file, System.Net.Mime.MediaTypeNames.Application.Octet, fileNameDownload);
+        }
+
     }
 }
