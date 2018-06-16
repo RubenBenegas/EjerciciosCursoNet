@@ -11,7 +11,7 @@ namespace ClasesGenericasReflection
             var reflexionador1 = new Reflectionador();
 
             //Instanciamos un objeto del tipo type que lo obtenemos mediante el merodo ObtenerType pasandole una clase cualquiera (Es generico)
-            var clase = reflexionador1.ObtenerType<String>();
+            var clase = reflexionador1.ObtenerType<Int32>();
 
             //Del objeto "clase" obtenemos sus propiedades
             var propiedades = clase.GetProperties();
@@ -33,7 +33,6 @@ namespace ClasesGenericasReflection
             {
                 Console.WriteLine("Esta clase no posee propiedades");
             }
-
 
             if (metodos.Length > 0)
             {
@@ -63,15 +62,14 @@ namespace ClasesGenericasReflection
                         {
                             Console.WriteLine("\t\tEste metodo no posee parametros");
                         }
-                        
                     }
-
                 }
             }
             else
             {
                 Console.WriteLine("Esta clase no posee metodos");
             }
+
             Console.ReadKey();
         }
     }
