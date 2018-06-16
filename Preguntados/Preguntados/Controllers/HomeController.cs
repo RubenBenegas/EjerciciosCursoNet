@@ -40,7 +40,7 @@ namespace Preguntados.Controllers
         public IActionResult Preguntar(bool respuesta, bool resultado, int idPregunta)
         {
             Random rnd = new Random();
-            var n = rnd.Next(1, 6);
+            var n = rnd.Next(1, 12);
             var r = new PreguntasRepository();
             var p = r.GetAllPreguntas();
             var x = p.Where(fa => fa.Id == n).FirstOrDefault();
