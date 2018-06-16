@@ -19,40 +19,37 @@ namespace Preguntados.Controllers
         }
 
         [HttpGet]
-        public IActionResult Resultado()
+        public IActionResult Resultado(bool resultado)
         {
-            var r = new PreguntasRepository();
-            var p = r.GetAllPreguntas();
-            var x = p.Where(fa => fa.Id == 1).FirstOrDefault();
-            return View();
-        }
-
-        [HttpGet]
-        public IActionResult Preguntar(bool respuesta, bool resultado)
-        {
-
-            var r = new PreguntasRepository();
-            var p = r.GetAllPreguntas();
-            var x = p.Where(fa => fa.Id == 2).FirstOrDefault();
-
-            if (respuesta)
+            if (resultado)
             {
-                if (resultado)
-                {
-                    ViewData["Respuesta"] = "Correcto";
-                }
-
-                else
-                {
-                    ViewData["Respuesta"] = "Incorrecto";
-                }
-
-                ViewData["Mostrar"] = "true";
+                //ViewData["Respuesta"] = "Correcto";
+                return Content("Correcto");
             }
             else
             {
-                ViewData["Mostrar"] = "false";
+                //ViewData["Respuesta"] = "Incorrecto";
             }
+
+            return Content("Incorrecto");
+            //return View();
+        }
+
+        [HttpGet]
+        public IActionResult Preguntar(bool respuesta, bool resultado, int idPregunta)
+        {
+            Random rnd = new Random();
+            var n = rnd.Next(1, 6);
+            var r = new PreguntasRepository();
+            var p = r.GetAllPreguntas();
+            var x = p.Where(fa => fa.Id == n).FirstOrDefault();
+
+            if (respuesta)
+            {
+                respuesta = false;
+                return Redirect("/Home/Resultado?resultado=" + resultado);
+            }
+            
             
 
             return View(x);
@@ -75,7 +72,7 @@ namespace Preguntados.Controllers
                 resultado = true;
             }
 
-            return Redirect("/Home/Preguntar?respuesta=true&resultado=" + resultado);
+            return Redirect("/Home/Preguntar?respuesta=true&resultado=" + resultado + "&idPregunta=" + idPregunta );
         }
 
         public IActionResult Error()
