@@ -23,16 +23,16 @@ namespace Preguntados.Controllers
         {
             if (resultado)
             {
-                //ViewData["Respuesta"] = "Correcto";
-                return Content("Correcto");
+                ViewData["Respuesta"] = "Correcto";
+                
             }
             else
             {
-                //ViewData["Respuesta"] = "Incorrecto";
+                ViewData["Respuesta"] = "Incorrecto";
             }
 
-            return Content("Incorrecto");
-            //return View();
+            return View();
+       
         }
 
         [HttpGet]
