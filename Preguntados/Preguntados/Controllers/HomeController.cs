@@ -24,11 +24,12 @@ namespace Preguntados.Controllers
             if (resultado)
             {
                 ViewData["Respuesta"] = "Correcto";
-                
+                ViewBag.Resultado = true;
             }
             else
             {
                 ViewData["Respuesta"] = "Incorrecto";
+                ViewBag.Resultado = false;
             }
 
             return View();

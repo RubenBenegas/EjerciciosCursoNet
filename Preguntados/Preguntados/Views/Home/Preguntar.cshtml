@@ -34,10 +34,10 @@
     <input type="text" name="id" value="@Model.Id"  hidden/>
     @foreach (var r in Model.Respuestas)
     {
-        <input type="radio" name="respuesta" value="@r.Id">@r.Enunciado <br />
+        <input type="radio" name="respuesta" checked value="@r.Id">@r.Enunciado <br />
     }
 
-    <input type="submit" />
+    <input class="btn"  style="background-color: @color; color: white;" type="submit" value="Responder" />
 </form>
 
 
