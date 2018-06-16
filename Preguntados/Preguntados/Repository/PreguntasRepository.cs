@@ -17,6 +17,7 @@ namespace Preguntados.Repository
 
         public List<Pregunta> GetAllPreguntas()
         {
+            #region Primera
             var p1 = new Pregunta
             {
                 Id = 1,
@@ -24,7 +25,7 @@ namespace Preguntados.Repository
                 Categoria = Categoria.Deportes,
                 Respuestas = new List<Respuesta>()
             };
-            p1.Respuestas.Add(new Respuesta { Id = 1, IdPregunta= 1, Enunciado = "Argentina", Correcta = true});
+            p1.Respuestas.Add(new Respuesta { Id = 1, IdPregunta = 1, Enunciado = "Argentina", Correcta = true });
             p1.Respuestas.Add(new Respuesta { Id = 2, IdPregunta = 1, Enunciado = "Brasil", Correcta = false });
             p1.Respuestas.Add(new Respuesta { Id = 3, IdPregunta = 1, Enunciado = "España", Correcta = false });
             p1.Respuestas.Add(new Respuesta { Id = 4, IdPregunta = 1, Enunciado = "Chile", Correcta = false });
@@ -37,7 +38,7 @@ namespace Preguntados.Repository
                 Enunciado = "¿Con cuántos países limita Argentina ?",
                 Categoria = Categoria.Geografia,
                 Respuestas = new List<Respuesta>()
-  
+
             };
             p2.Respuestas.Add(new Respuesta { Id = 5, IdPregunta = 1, Enunciado = "Tres", Correcta = false });
             p2.Respuestas.Add(new Respuesta { Id = 6, IdPregunta = 1, Enunciado = "Cuatro", Correcta = false });
@@ -100,6 +101,10 @@ namespace Preguntados.Repository
             p6.Respuestas.Add(new Respuesta { Id = 21, IdPregunta = 1, Enunciado = "Harrison Ford", Correcta = true });
             p6.Respuestas.Add(new Respuesta { Id = 22, IdPregunta = 1, Enunciado = "Robin Williams", Correcta = false });
             _ListaPreguntas.Add(p6);
+            #endregion
+
+
+
 
             return _ListaPreguntas;
         }
