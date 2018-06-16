@@ -1,0 +1,29 @@
+﻿@*@model Pregunta
+@{
+    var color = "";
+    switch (Model.Categoria)
+    {
+        case Categoria.Deportes:
+            color = "Orange";
+            break;
+        case Categoria.Geografia:
+            color = "Blue";
+            break;
+
+    }
+}*@
+
+<a asp-controller="home" asp-action="Preguntar">JUGAR</a>
+@*<h3 style="background-color: @color; color: white;">@Model.Categoria</h3>
+
+<h4>@Model.Enunciado</h4>
+
+<form action="" method="post">
+    <input type="text" name="id" value="@Model.Id"  hidden/>
+    @foreach (var r in Model.Respuestas)
+    {
+        <input type="radio" name="respuesta" value="@r.Id">@r.Enunciado <br />
+   }
+    
+    <input type="submit" />
+</form>*@
