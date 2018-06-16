@@ -51,9 +51,10 @@ namespace ClasesGenericasReflection
                         var n = 1;
                         if (item.GetParameters().Length > 0)
                         {
+                            //Recorremos los parametros de los metodos
                             foreach (var param in item.GetParameters())
                             {
-
+                                //Mostramos los parametros, su tipo y su nombre
                                 Console.WriteLine("\t\t" + n + " Parametro: " + param.ParameterType.Name + " " + param.Name);
                                 n++;
                             }
