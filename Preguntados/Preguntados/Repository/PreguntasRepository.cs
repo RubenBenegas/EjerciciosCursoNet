@@ -43,6 +43,7 @@ namespace Preguntados.Repository
             p2.Respuestas.Add(new Respuesta { Id = 6, IdPregunta = 1, Enunciado = "Cuatro", Correcta = false });
             p2.Respuestas.Add(new Respuesta { Id = 7, IdPregunta = 1, Enunciado = "Cinco", Correcta = true });
             p2.Respuestas.Add(new Respuesta { Id = 8, IdPregunta = 1, Enunciado = "Seis", Correcta = false });
+            _ListaPreguntas.Add(p2);
 
             var p3 = new Pregunta
             {

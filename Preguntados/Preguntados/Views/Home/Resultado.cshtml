@@ -1,0 +1,17 @@
+﻿
+@{
+    var res = ViewBag.Resultado;
+}
+
+<h3>@ViewData["Respuesta"]</h3>
+
+@if (res)
+{
+    <a class="btn btn-info btn-3d" href="/Home/Preguntar"> Siguiente pregunta</a>
+
+}
+else
+{
+    <a class="btn btn-danger btn-3d" href="/Home/"> Volver </a>
+    
+}
