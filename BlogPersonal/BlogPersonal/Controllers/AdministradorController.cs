@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using BlogPersonal.DataAccess;
+using BlogPersonal.Data;
 using BlogPersonal.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -50,7 +50,7 @@ namespace BlogPersonal.Controllers
             publicacion.Subtitulo = Request.Form["Subtitulo"];
             publicacion.Autor = Request.Form["Autor"];
             publicacion.Fecha = Convert.ToDateTime(Request.Form["Fecha"]);
-
+            publicacion.Cuerpo = Request.Form["Cuerpo"];
 
             _context.Publicacion.Add(publicacion);
             _context.SaveChanges();
@@ -86,6 +86,7 @@ namespace BlogPersonal.Controllers
                 publicacion.Subtitulo = Request.Form["Subtitulo"];
                 publicacion.Autor = Request.Form["Autor"];
                 publicacion.Fecha = Convert.ToDateTime(Request.Form["Fecha"]);
+                publicacion.Cuerpo = Request.Form["Cuerpo"];
                 _context.Entry(publicacion).State = EntityState.Modified;
                 _context.SaveChanges();
                 return RedirectToAction("Index");

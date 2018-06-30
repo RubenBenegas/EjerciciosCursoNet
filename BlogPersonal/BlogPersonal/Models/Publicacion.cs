@@ -13,6 +13,10 @@ namespace BlogPersonal.Models
 
         public string Subtitulo { get; set; }
 
+        public string Cuerpo { get; set; }
+
+        public string Foto { get; set; }
+
         public string Autor { get; set; }
 
         public DateTime Fecha { get; set; }

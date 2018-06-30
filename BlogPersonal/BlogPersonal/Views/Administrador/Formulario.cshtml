@@ -27,6 +27,14 @@
                     <input name="Fecha" type="date" class="form-control" value="@Model.Fecha.ToShortDateString()" @ViewBag.Disabled required />
                 </div>
                 <div class="form-group">
+                    <label class="control-label">Foto Portada</label>
+                    <input name="Foto"  class="form-control" value="@Model.Foto" @ViewBag.Disabled placeholder="Ingrese la url de la imagen..." required />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Cuerpo">Cuerpo</label>
+                    <textarea name="Cuerpo" class="form-control" style="width: 700px; height: 300px;">@Model.Cuerpo</textarea>
+                </div>
+                <div class="form-group">
                     <input type="submit" value="@ViewBag.Accion" class="btn btn-default" />
                 </div>
             </form>

@@ -1,6 +1,6 @@
 ﻿using BlogPersonal.Models;
 using Microsoft.EntityFrameworkCore;
-namespace BlogPersonal.DataAccess
+namespace BlogPersonal.Data
 {
     public class BlogPersonalDbContext: DbContext
     {
