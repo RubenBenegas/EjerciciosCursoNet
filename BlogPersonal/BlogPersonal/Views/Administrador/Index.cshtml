@@ -1,0 +1,54 @@
+﻿@model IEnumerable<BlogPersonal.Models.Publicacion>
+@{
+    Layout = "AdminLayout";
+}
+
+<div class="container">
+
+    <table class="table table-horizontal">
+        <thead>
+            <tr>
+                <th>
+                    Titulo
+                </th>
+                <th>
+                    Subtitulo
+                </th>
+                <th>
+                    Autor
+                </th>
+                <th>
+                    Fecha
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.Titulo
+                    </td>
+                    <td>
+                        @item.Subtitulo
+                    </td>
+                    <td>
+                        @item.Autor
+                    </td>
+                    <td>
+                        @item.Fecha.ToLongDateString()
+                    </td>
+                    <td>
+                        <a href="/Administrador/Editar/@item.Id">Editar</a> |
+                        <a href="/Administrador/Eliminar/@item.Id">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <p>
+        <a class="btn btn-success" href="/Administrador/Agregar">Crear nuevo</a>
+    </p>
+</div>
