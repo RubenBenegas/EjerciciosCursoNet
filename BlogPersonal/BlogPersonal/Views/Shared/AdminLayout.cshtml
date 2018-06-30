@@ -16,32 +16,8 @@
     <link href="/css/clean-blog.min.css" rel="stylesheet">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-        <div class="container">
-            <a class="navbar-brand" href="/Inicio">Blog de Juan Perez</a>
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                Menu
-                <i class="fa fa-bars"></i>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Inicio">Inicio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/AcercaDe">Acerca de</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Contacto">Contacto</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Administrador">Administrador</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    @await Html.PartialAsync("_HeaderPartial")
+
     <!-- Page Header -->
     <header class="masthead" style="background-image: url('@ViewBag.Imagen')">
         <div class="overlay"></div>
@@ -64,15 +40,16 @@
     <script src="/vendor/jquery/jquery.min.js"></script>
     <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- Custom scripts for this template -->
-<script src="/js/clean-blog.min.js"></script>
-<script src="/tinymce/tinymce.min.js"></script>
-<script>tinymce.init({
-    selector: 'textarea',
-    language: 'es',
-    insert_toolbar: 'quickimage quicktable',
-    theme: 'modern',
-    plugins: 'print preview fullpage searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern help',
-    file_picker_types: 'file image media'
-});</script>
+    <script src="/js/clean-blog.min.js"></script>
+    <script src="/tinymce/tinymce.min.js"></script>
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            language: 'es',
+            insert_toolbar: 'quickimage quicktable',
+            theme: 'modern',
+            plugins: 'print preview fullpage searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern help',
+            file_picker_types: 'file image media'
+        });</script>
 </body>
 </html>
