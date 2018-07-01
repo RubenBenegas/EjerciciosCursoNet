@@ -24,7 +24,7 @@
                 </div>
                 <div class="form-group">
                     <label class="control-label">Fecha</label>
-                    <input name="Fecha" type="date" class="form-control" value="@Model.Fecha.ToShortDateString()" @ViewBag.Disabled required />
+                    <input name="Fecha" type="date" class="form-control" value="@Model.Fecha.ToString("yyyy-MM-d")" @ViewBag.Disabled required />
                 </div>
                 <div class="form-group">
                     <label class="control-label">Foto Portada</label>

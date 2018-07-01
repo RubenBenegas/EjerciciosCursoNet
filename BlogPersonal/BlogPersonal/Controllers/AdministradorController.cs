@@ -46,12 +46,6 @@ namespace BlogPersonal.Controllers
         [HttpPost]
         public IActionResult Agregar(Publicacion publicacion)
         {
-            publicacion.Titulo = Request.Form["Titulo"];
-            publicacion.Subtitulo = Request.Form["Subtitulo"];
-            publicacion.Autor = Request.Form["Autor"];
-            publicacion.Fecha = Convert.ToDateTime(Request.Form["Fecha"]);
-            publicacion.Cuerpo = Request.Form["Cuerpo"];
-
             _context.Publicacion.Add(publicacion);
             _context.SaveChanges();
 
@@ -82,11 +76,6 @@ namespace BlogPersonal.Controllers
         {
             if (ModelState.IsValid)
             {
-                publicacion.Titulo = Request.Form["Titulo"];
-                publicacion.Subtitulo = Request.Form["Subtitulo"];
-                publicacion.Autor = Request.Form["Autor"];
-                publicacion.Fecha = Convert.ToDateTime(Request.Form["Fecha"]);
-                publicacion.Cuerpo = Request.Form["Cuerpo"];
                 _context.Entry(publicacion).State = EntityState.Modified;
                 _context.SaveChanges();
                 return RedirectToAction("Index");
