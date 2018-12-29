@@ -1,0 +1,50 @@
+﻿@page
+@model IndexModel
+@{
+  ViewData["Title"] = "Home page";
+}
+
+<div class="container">
+  <div class="row">&nbsp;</div>
+  <div class="row">
+    <div class="col-6">&nbsp;</div>
+    <div class="col-6">
+      Usuario <input type="text" id="userInput" class="form-control" />
+      @*<br />
+    Message...<input type="text" id="messageInput" class="form-control" />
+    <input type="button" id="sendButton" value="Send Message" class="btn bg-primary" />*@
+    </div>
+  </div>
+  @*<div class="row">
+    <div class="col-12">
+      <hr />
+    </div>
+  </div>*@
+  <div class="row">
+
+    <div class="col-12 panel panel-default">
+      <p>Usted se ha conectado al chat... </p>
+      <ul class="col-6" id="messagesList"></ul>
+    </div>
+
+    <div class="col-12">
+      <div class="input-group">
+        <input type="text" id="messageInput" class="form-control" placeholder="Message..."/>
+        <span class="input-group-btn">
+          <input type="button" id="sendButton" value="Send Message" class="btn bg-primary" />
+        </span>
+      </div><!-- /input-group -->
+    </div><!-- /.col-lg-6 -->
+  </div>
+  
+
+</div>
+
+
+
+
+
+
+
+<script src="~/lib/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/chat.js"></script>

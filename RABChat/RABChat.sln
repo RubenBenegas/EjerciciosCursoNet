@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.168
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RABChat", "RABChat\RABChat.csproj", "{257AEFEC-2B6E-4BC0-8766-3E1059D0BE62}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{257AEFEC-2B6E-4BC0-8766-3E1059D0BE62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{257AEFEC-2B6E-4BC0-8766-3E1059D0BE62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{257AEFEC-2B6E-4BC0-8766-3E1059D0BE62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{257AEFEC-2B6E-4BC0-8766-3E1059D0BE62}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EC16F400-2434-4C7B-9184-EE4ADF497E7D}
+	EndGlobalSection
+EndGlobal
